@@ -3,8 +3,9 @@
     [zero-one.geni.core :as g])
   (:gen-class))
 
-(defonce spark (g/create-spark-session {}))
+(defonce spark (delay (g/create-spark-session {})))
 
 (defn -main [& _]
-  (let [dataframe (g/read-csv! spark "resources/dummy.csv")]
+  (println "Spark master: " (-> @spark .sparkContext .master))
+  (let [dataframe (g/read-csv! @spark "resources/dummy.csv")]
     (g/show dataframe)))
