@@ -1,6 +1,7 @@
 (ns {{namespace}}.core
   (:require
-    [leiningen.core.main]
+    [clojure.main]
+    [nrepl.server]
     [zero-one.geni.core :as g]
     [zero-one.geni.ml :as ml])
   (:gen-class))
@@ -44,4 +45,7 @@
         (ml/transform model)
         (g/select :id :text :probability :prediction)
         g/show))
-  (leiningen.core.main/-main "repl"))
+  (let [port 7788]
+    (nrepl.server/start-server :port port)
+    (println (str "nREPL server started on port " port))
+    (clojure.main/repl :init #(ns {{namespace}}.core))))

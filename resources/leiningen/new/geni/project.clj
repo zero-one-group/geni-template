@@ -3,16 +3,16 @@
   :url "http://example.com/FIXME"
   :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
             :url "https://www.eclipse.org/legal/epl-2.0/"}
-  :dependencies [[leiningen "2.9.3"]
-                 [org.clojure/clojure "1.10.1"]
-                 [reply "0.4.4"]
+  :dependencies [[org.clojure/clojure "1.10.1"]
                  [zero.one/geni "0.0.13"]
+                 [nrepl "0.7.0"]
                  ;; Spark
                  [org.apache.spark/spark-core_2.12 "3.0.0"]
                  [org.apache.spark/spark-hive_2.12 "3.0.0"]
                  [org.apache.spark/spark-mllib_2.12 "3.0.0"]
                  [org.apache.spark/spark-sql_2.12 "3.0.0"]
-                 [org.apache.spark/spark-streaming_2.12 "3.0.0"]{{#dataproc?}}
+                 [org.apache.spark/spark-streaming_2.12 "3.0.0"]
+                 [org.apache.spark/spark-yarn_2.12 "3.0.0"]{{#dataproc?}}
                  ;; Dataproc
                  [org.apache.hadoop/hadoop-client "3.2.1"]
                  [com.google.guava/guava "27.0-jre"]{{/dataproc?}}{{#xgboost?}}
