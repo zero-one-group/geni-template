@@ -1,7 +1,6 @@
 (ns {{namespace}}.core
   (:require
-    [clojure.main]
-    [nrepl.server]
+    [{{namespace}}.repl]
     [zero-one.geni.core :as g]
     [zero-one.geni.ml :as ml])
   (:gen-class))
@@ -45,7 +44,5 @@
         (ml/transform model)
         (g/select :id :text :probability :prediction)
         g/show))
-  (let [port 7788]
-    (nrepl.server/start-server :port port)
-    (println (str "nREPL server started on port " port))
-    (clojure.main/repl :init #(ns {{namespace}}.core))))
+  ({{namespace}}.repl/launch-repl)
+  (System/exit 0))

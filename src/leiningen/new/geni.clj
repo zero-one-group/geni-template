@@ -28,4 +28,5 @@
              [".gitignore" (render "gitignore" data)]
              ["README.md" (render "README.md" data)]
              ["project.clj" (render "project.clj" data)]
-             ["src/{{nested-dirs}}/core.clj" (render "core.clj" data)])))
+             ["src/{{nested-dirs}}/core.clj" (render "core.clj" data)]
+             ["src/{{nested-dirs}}/repl.clj" (render "repl.clj" data)])))
