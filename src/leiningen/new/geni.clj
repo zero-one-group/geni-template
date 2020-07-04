@@ -6,20 +6,26 @@
 
 (def render (renderer "geni"))
 
+(defn option? [option-name options]
+  (boolean (some #{option-name} options)))
+
 (defn geni
   "A geni project template."
-  [name]
+  [name & options]
   (let [main-ns (sanitize-ns name)
         data    {:raw-name    name
                  :name        (project-name name)
                  :namespace   main-ns
                  :nested-dirs (name-to-path main-ns)
                  :year        (year)
-                 :date        (date)}]
+                 :date        (date)
+                 ;; Options
+                 :dataproc?   (option? "+dataproc" options)
+                 :gsheets?    (option? "+gsheets" options)
+                 :xgboost?    (option? "+xgboost" options)}]
     (main/info "Generating a new geni project.")
     (->files data
              [".gitignore" (render "gitignore" data)]
              ["README.md" (render "README.md" data)]
              ["project.clj" (render "project.clj" data)]
-             ["resources/dummy.csv" (render "dummy.csv" data)]
              ["src/{{nested-dirs}}/core.clj" (render "core.clj" data)])))

@@ -1,5 +1,6 @@
 (ns {{namespace}}.core
   (:require
+    [leiningen.core.main]
     [zero-one.geni.core :as g]
     [zero-one.geni.ml :as ml])
   (:gen-class))
@@ -42,5 +43,5 @@
     (-> @test-set
         (ml/transform model)
         (g/select :id :text :probability :prediction)
-        g/show)))
-
+        g/show))
+  (leiningen.core.main/-main "repl"))
