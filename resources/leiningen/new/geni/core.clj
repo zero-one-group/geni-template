@@ -5,7 +5,11 @@
     [zero-one.geni.ml :as ml])
   (:gen-class))
 
-(defonce spark (delay (g/create-spark-session {})))
+{{! Change mustache delimiter to <% and %>}}
+{{=<% %>=}}
+(defonce spark (delay (g/create-spark-session {<%#dataproc?%>:master "yarn"<%/dataproc?%>})))
+<%! Reset mustache delimiter %>
+<%={{ }}=%>
 
 (def training-set
   (delay
