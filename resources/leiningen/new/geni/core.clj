@@ -1,5 +1,6 @@
 (ns {{namespace}}.core
   (:require
+    [clojure.pprint]
     [{{namespace}}.repl]
     [zero-one.geni.core :as g]
     [zero-one.geni.ml :as ml])
@@ -42,7 +43,7 @@
       [:id :text])))
 
 (defn -main [& _]
-  (-> @spark .sparkContext .getConf .toDebugString println)
+  (clojure.pprint/pprint (g/spark-conf @spark))
   (let [model (ml/fit @training-set pipeline)]
     (-> @test-set
         (ml/transform model)
