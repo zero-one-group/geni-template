@@ -29,13 +29,13 @@
                  [org.apache.hadoop/hadoop-client "2.7.3"]{{/gsheets?}}]{{#dataproc?}}:plugins [[lein-shell "0.5.0"]]
   :jar-name "{{raw-name}}.jar"
   :uberjar-name "{{raw-name}}-standalone.jar"
-  :aliases {"spark-repl" ["do"
-                          ["uberjar"]
-                          ["shell"
-                           "spark-submit"
-                           "--class"
-                           "{{namespace}}.core"
-                           "target/uberjar/{{raw-name}}-standalone.jar"]]}{{/dataproc?}}
+  :aliases {"spark-submit" ["do"
+                            ["uberjar"]
+                            ["shell"
+                             "spark-submit"
+                             "--class"
+                             "{{namespace}}.core"
+                             "target/uberjar/{{raw-name}}-standalone.jar"]]}{{/dataproc?}}
   :profiles {:uberjar {:aot :all}}
   :main ^:skip-aot {{namespace}}.core
   :target-path "target/%s")
