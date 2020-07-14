@@ -4,7 +4,7 @@
   :license {:name "EPL-2.0 OR GPL-2.0-or-later WITH Classpath-exception-2.0"
             :url "https://www.eclipse.org/legal/epl-2.0/"}
   :dependencies [[org.clojure/clojure "1.10.1"]
-                 [zero.one/geni "0.0.14"]
+                 [zero.one/geni "0.0.15"]
                  ;; REPL
                  [nrepl "0.7.0"]
                  [reply "0.4.4"]
@@ -20,13 +20,7 @@
                  [com.google.guava/guava "27.0-jre"]{{/dataproc?}}{{#xgboost?}}
                  ;; Optional: Spark XGBoost
                  [ml.dmlc/xgboost4j-spark_2.12 "1.0.0"]
-                 [ml.dmlc/xgboost4j_2.12 "1.0.0"]{{/xgboost?}}{{#gsheets?}}
-                 ;; Optional: Google Sheets Integration
-                 [com.google.api-client/google-api-client "1.30.9"]
-                 [com.google.apis/google-api-services-drive "v3-rev197-1.25.0"]
-                 [com.google.apis/google-api-services-sheets "v4-rev612-1.25.0"]
-                 [com.google.oauth-client/google-oauth-client-jetty "1.30.6"]
-                 [org.apache.hadoop/hadoop-client "2.7.3"]{{/gsheets?}}]{{#dataproc?}}:plugins [[lein-shell "0.5.0"]]
+                 [ml.dmlc/xgboost4j_2.12 "1.0.0"]{{/xgboost?}}]{{#dataproc?}}:plugins [[lein-shell "0.5.0"]]
   :jar-name "{{raw-name}}.jar"
   :uberjar-name "{{raw-name}}-standalone.jar"
   :aliases {"spark-submit" ["do"
