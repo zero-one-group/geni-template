@@ -14,7 +14,8 @@
                  [org.apache.spark/spark-mllib_2.12 "3.0.0"]
                  [org.apache.spark/spark-sql_2.12 "3.0.0"]
                  [org.apache.spark/spark-streaming_2.12 "3.0.0"]
-                 [org.apache.spark/spark-yarn_2.12 "3.0.0"]{{#dataproc?}}
+                 [org.apache.spark/spark-yarn_2.12 "3.0.0"]
+                 [com.github.fommil.netlib/all "1.1.2" :extension "pom"]{{#dataproc?}}
                  ;; Dataproc
                  [org.apache.hadoop/hadoop-client "3.2.1"]
                  [com.google.guava/guava "27.0-jre"]{{/dataproc?}}{{#xgboost?}}
