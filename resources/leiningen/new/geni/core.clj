@@ -1,19 +1,19 @@
 (ns {{namespace}}.core
   (:require
     [clojure.pprint]
-    [{{namespace}}.repl]
     [zero-one.geni.core :as g]
-    [zero-one.geni.ml :as ml])
+    [zero-one.geni.ml :as ml]
+    [zero-one.geni.repl :as repl])
   (:gen-class))
 
 {{! Change mustache delimiter to <% and %>}}
 {{=<% %>=}}
-(defonce spark (delay (g/create-spark-session {<%#dataproc?%>:master "yarn"<%/dataproc?%>})))
+(defonce spark (future (g/create-spark-session {<%#dataproc?%>:master "yarn"<%/dataproc?%>})))
 <%! Reset mustache delimiter %>
 <%={{ }}=%>
 
 (def training-set
-  (delay
+  (future
     (g/table->dataset
       @spark
       [[0 "a b c d e spark"  1.0]
@@ -33,7 +33,7 @@
                              :reg-param 0.001})))
 
 (def test-set
-  (delay
+  (future
     (g/table->dataset
       @spark
       [[4 "spark i j k"]
@@ -49,5 +49,9 @@
         (ml/transform model)
         (g/select :id :text :probability :prediction)
         g/show))
-  ({{namespace}}.repl/launch-repl)
+  (let [port    (+ 65001 (rand-int 500))
+        welcome (repl/spark-welcome-note (.version @spark))]
+    (println welcome)
+    (repl/launch-repl {:port port :custom-eval '(ns zero-one.geni.main)})
+    (System/exit 0))
   (System/exit 0))
