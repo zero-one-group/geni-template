@@ -6,6 +6,9 @@
     [zero-one.geni.repl :as repl])
   (:gen-class))
 
+;; Removes the pesky ns warning that takes up the first line of the REPL.
+(require '[net.cgrand.parsley.fold])
+
 {{! Change mustache delimiter to <% and %>}}
 {{=<% %>=}}
 (defonce spark (future (g/create-spark-session {<%#dataproc?%>:master "yarn"<%/dataproc?%>})))
@@ -52,6 +55,6 @@
   (let [port    (+ 65001 (rand-int 500))
         welcome (repl/spark-welcome-note (.version @spark))]
     (println welcome)
-    (repl/launch-repl {:port port :custom-eval '(ns zero-one.geni.main)})
+    (repl/launch-repl {:port port :custom-eval '(ns {{namespace}}.core)})
     (System/exit 0))
   (System/exit 0))
